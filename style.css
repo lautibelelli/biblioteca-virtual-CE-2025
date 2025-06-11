@@ -1,0 +1,44 @@
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background: white;
+  color: #333;
+}
+header {
+  background-color: #c1121f;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 1rem;
+  flex-wrap: wrap;
+}
+button {
+  padding: 0.5rem 1rem;
+  background: #c1121f;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background: #a30d18;
+}
+section {
+  padding: 1rem;
+}
+.file {
+  margin-bottom: 0.5rem;
+}
+.rating span {
+  cursor: pointer;
+  font-size: 20px;
+  color: #ccc;
+}
+.rating span.selected {
+  color: gold;
+}
