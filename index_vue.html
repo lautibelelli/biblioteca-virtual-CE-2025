@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Biblioteca Digital CE ISD</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #fff;
+      color: #333;
+      margin: 0;
+    }
+    header {
+      background-color: #c1121f;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #f2f2f2;
+      padding: 1rem;
+    }
+    nav button {
+      margin: 5px;
+      padding: 0.5rem 1rem;
+      background: #c1121f;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    nav button.active {
+      background: #a30d18;
+    }
+    main {
+      padding: 1rem;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 0.75rem;
+      border-left: 5px solid #c1121f;
+      padding-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Biblioteca Digital CE ISD</h1>
+    </header>
+    <nav>
+      <button 
+        v-for="curso in cursos" 
+        :key="curso" 
+        @click="setCurso(curso)" 
+        :class="{ active: curso === cursoSeleccionado }"
+      >
+        {{ curso }}° Año
+      </button>
+    </nav>
+    <main>
+      <h2>{{ cursoSeleccionado }}° Año</h2>
+      <ul>
+        <li v-for="archivo in archivos[cursoSeleccionado]" :key="archivo">
+          <a :href="getUrl(cursoSeleccionado, archivo)" target="_blank">
+            📄 {{ archivo }}
+          </a>
+        </li>
+      </ul>
+    </main>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          cursos: ['1', '2', '3', '4', '5', '6'],
+          cursoSeleccionado: '1',
+          archivos: {
+            '1': [],
+            '2': [],
+            '3': [],
+            '4': [],
+            '5': [],
+            '6': ['SARMIENTO-Facundo-civilización-o-barbarie.pdf']
+          },
+          baseUrl: 'https://lautibelelli.github.io/biblioteca-digital-isd'
+        };
+      },
+      methods: {
+        setCurso(curso) {
+          this.cursoSeleccionado = curso;
+        },
+        getUrl(curso, archivo) {
+          const nombres = {
+            '1': 'primero',
+            '2': 'segundo',
+            '3': 'tercero',
+            '4': 'cuarto',
+            '5': 'quinto',
+            '6': 'sexto'
+          };
+          return `${this.baseUrl}/${nombres[curso]}/${archivo}`;
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
